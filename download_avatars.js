@@ -19,7 +19,13 @@ function getRepoContributors(repoOwner, repoName, cb){
 
 }
 
-getRepoContributors("jquery","jquery", function(err, result,body){
+
+console.log(process.argv)
+
+if(process.argv.length < 4){
+  console.log("Please pass Repo Name and a User name");
+}else{
+getRepoContributors(process.argv[2],process.argv[3], function(err, result,body){
 
   var data = JSON.parse(body);
   let avatarUrls =
@@ -31,6 +37,7 @@ getRepoContributors("jquery","jquery", function(err, result,body){
     downloadImageByUrl(avatarUrls[i],"avatars/"+userIds[i]+".jpg");
   }
 });
+}
 
 function downloadImageByUrl(url, filepath){
 
